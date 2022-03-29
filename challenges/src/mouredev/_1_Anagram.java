@@ -33,7 +33,7 @@ public class _1_Anagram {
 		Arrays.sort(arrayS2);
 		str2 = new String(arrayS2);
 
-		return str1.equalsIgnoreCase(str2);
+		return str1.equals(str2);
 	}
 
 	public static void main(String[] args) {

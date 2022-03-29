@@ -1,5 +1,9 @@
 package codility;
 
+import java.util.Arrays;
+import java.util.OptionalInt;
+import java.util.stream.Stream;
+
 //A binary gap within a positive integer N is any maximal sequence of consecutive zeros that is surrounded by ones at both ends in the binary representation of N.
 //
 //For example, number 9 has binary representation 1001 and contains a binary gap of length 2. The number 529 has binary representation 1000010001 and contains two binary gaps: one of length 4 and one of length 3. The number 20 has binary representation 10100 and contains one binary gap of length 1. The number 15 has binary representation 1111 and has no binary gaps. The number 32 has binary representation 100000 and has no binary gaps.
@@ -32,8 +36,19 @@ public class _1_BinaryGap {
 		return maxBinaryGap;
 	}
 
-	public static void main(String[] args) {
+	public static int functionalSolution(int N) {
+		String binaryNumber = Integer.toBinaryString(N);
+		String[] zeroList = binaryNumber.split("1");
 
+		if (binaryNumber.endsWith("0"))
+			zeroList = Arrays.copyOf(zeroList, zeroList.length - 1);
+
+		OptionalInt maxBinaryGap = Stream.of(zeroList).filter(e -> e.length() > 0).mapToInt(e -> e.length()).max();
+		return maxBinaryGap.isPresent() ? maxBinaryGap.getAsInt() : 0;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(functionalSolution(12341414));
 	}
 
 }
